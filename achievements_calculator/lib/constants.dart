@@ -8,5 +8,4 @@ const Color darkTextColor = Color(0xFF1832BB);
 const Color lightDarkTextColor = Color(0xFFB4B4B4);
 const Color lightMainButtonColor = Color(0xFF0CC8F2);
 const Color darkMainButtonColor = Color(0xFF006EFF);
-const Color secondaryButtonColor = Color(0xFF181A21);
 const Color textFieldColor = Color(0xFF32353C);
