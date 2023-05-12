@@ -1,7 +1,7 @@
 import 'package:achievements_calculator/components/already_have_an_account_check.dart';
 import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
-import 'package:achievements_calculator/screens/signup/signup_screen.dart';
+import 'package:achievements_calculator/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
@@ -40,7 +40,7 @@ class ContainerForm extends StatelessWidget {
                 darkColor: lightDarkTextColor,
               ),
               MainButton(
-                text: 'Login',
+                text: 'Sign Up',
                 lightColor: lightMainButtonColor,
                 darkColor: darkMainButtonColor,
                 press: () {},
@@ -51,8 +51,9 @@ class ContainerForm extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignUpScreen()));
+                          builder: (context) => const LoginScreen()));
                 },
+                login: false,
               ),
             ],
           )),

@@ -1,4 +1,4 @@
-import 'package:achievements_calculator/screens/login/components/body.dart';
+import 'package:achievements_calculator/screens/login/components/login_body.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -7,8 +7,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: BackgroundImage(
-          nameBackgroundImage: 'assets/images/login_background.png'),
+      body:
+          LoginBody(nameBackgroundImage: 'assets/images/login_background.png'),
     );
   }
 }

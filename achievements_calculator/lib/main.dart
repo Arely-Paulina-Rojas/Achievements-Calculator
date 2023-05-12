@@ -1,9 +1,14 @@
 import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +29,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/*
 const defaultInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(16)),
     borderSide: BorderSide(color: lightTextColor, width: 1));
+*/

@@ -1,11 +1,11 @@
 import 'dart:ui';
-import 'package:achievements_calculator/screens/login/components/container_form.dart';
+import 'package:achievements_calculator/screens/signup/components/container_form.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
-class BackgroundImage extends StatelessWidget {
+class SignUpBody extends StatelessWidget {
   final String nameBackgroundImage;
-  const BackgroundImage({Key? key, required this.nameBackgroundImage})
+  const SignUpBody({Key? key, required this.nameBackgroundImage})
       : super(key: key);
 
   @override
@@ -27,13 +27,13 @@ class BackgroundImage extends StatelessWidget {
                       color: lightTextColor,
                       fontSize: 22)),
               SizedBox(height: size.width * 0.02),
-              Image.asset('assets/icons/informacion-personal.png',
+              Image.asset('assets/icons/agregar-usuario.png',
                   height: size.height * 0.12),
               SizedBox(height: size.width * 0.05),
               SizedBox(
                 width: size.width * 0.8,
                 child: const Text(
-                  "LOGIN",
+                  "SIGN UP",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
