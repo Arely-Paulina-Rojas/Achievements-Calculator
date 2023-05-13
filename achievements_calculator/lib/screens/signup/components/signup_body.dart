@@ -11,8 +11,10 @@ class SignUpBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-        body: Container(
+    return SingleChildScrollView(
+        child: Container(
+      width: double.infinity,
+      height: size.height,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(nameBackgroundImage), fit: BoxFit.cover)),
