@@ -4,11 +4,13 @@ import 'package:achievements_calculator/components/main_button.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
-class GameForm extends StatelessWidget {
-  final TextEditingController gameNameController = TextEditingController();
-  final TextEditingController percengateController = TextEditingController();
-  GameForm(
-      {Key? key, required nameGameController, required percentageController})
+class AddGameForm extends StatelessWidget {
+  final TextEditingController gameNameController;
+  final TextEditingController percentageController;
+  const AddGameForm(
+      {Key? key,
+      required this.gameNameController,
+      required this.percentageController})
       : super(key: key);
 
   @override
@@ -25,7 +27,7 @@ class GameForm extends StatelessWidget {
               isPasswordField: false),
           InputField(
               onChanged: (value) {},
-              controller: percengateController,
+              controller: percentageController,
               labelName: "PERCENGATE",
               lightColor: lightDarkTextColor,
               darkColor: lightDarkTextColor,

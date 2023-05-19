@@ -1,11 +1,11 @@
-import 'package:achievements_calculator/components/game_form.dart';
+import 'package:achievements_calculator/components/add_game_form.dart';
 import 'package:achievements_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
-void customShowGeneralDialog(
+void customShowAddGameDialog(
     BuildContext context,
     TextEditingController gameNameController,
-    TextEditingController percengateController) {
+    TextEditingController percentageController) {
   showGeneralDialog(
       barrierDismissible: true,
       barrierLabel: "Add game",
@@ -44,9 +44,9 @@ void customShowGeneralDialog(
                           ),
                           const Padding(
                               padding: EdgeInsets.symmetric(vertical: 16)),
-                          GameForm(
-                              nameGameController: gameNameController,
-                              percentageController: percengateController),
+                          AddGameForm(
+                              gameNameController: gameNameController,
+                              percentageController: percentageController)
                         ],
                       ),
                       const Positioned(
