@@ -1,5 +1,6 @@
 import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/screens/login/login_screen.dart';
+import 'package:achievements_calculator/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: "Inter",
         ),
-        home: const LoginScreen());
+        home: OnboardingScreen());
   }
 }
 

@@ -1,9 +1,6 @@
-import 'dart:ui';
-import 'package:achievements_calculator/components/already_have_an_account_check.dart';
-import 'package:achievements_calculator/components/custom_show_general_dialog.dart';
-import 'package:achievements_calculator/components/game_form.dart';
-import 'package:achievements_calculator/components/image_button.dart';
-import 'package:achievements_calculator/components/input_field.dart';
+import 'package:achievements_calculator/components/custom_show_add_game_dialog.dart';
+import 'package:achievements_calculator/components/custom_show_update_game_dialog.dart';
+import 'package:achievements_calculator/components/custom_show_update_user_dialog.dart';
 import 'package:achievements_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import '../../components/main_button.dart';
@@ -22,7 +19,7 @@ class OnboardingScreen extends StatelessWidget {
           MainButton(
               text: "Pruebita",
               press: () {
-                customShowGeneralDialog(
+                customShowUpdateUserDialog(
                     context, gameNameController, percengateController);
               },
               lightColor: lightMainButtonColor,
