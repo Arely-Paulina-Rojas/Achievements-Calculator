@@ -1,6 +1,6 @@
 class Game {
-  final String name;
+  final String name, image;
   final int idGame, percentage;
 
-  Game(this.idGame, this.name, this.percentage);
+  Game(this.idGame, this.image, this.name, this.percentage);
 }

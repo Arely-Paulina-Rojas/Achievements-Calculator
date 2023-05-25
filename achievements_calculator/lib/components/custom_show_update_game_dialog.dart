@@ -4,12 +4,14 @@ import 'package:achievements_calculator/database/common/game.dart';
 import 'package:flutter/material.dart';
 
 void customShowUpdateGameDialog(
-    BuildContext context,
-    TextEditingController gameNameController,
-    TextEditingController percentageController) {
+  BuildContext context,
+  Game game,
+  //TextEditingController gameNameController,
+  //TextEditingController percentageController
+) {
   showGeneralDialog(
       barrierDismissible: true,
-      barrierLabel: "Add game",
+      barrierLabel: "Update game",
       context: context,
       transitionDuration: const Duration(milliseconds: 400),
       transitionBuilder: (_, animation, __, child) {
@@ -46,9 +48,9 @@ void customShowUpdateGameDialog(
                           const Padding(
                               padding: EdgeInsets.symmetric(vertical: 16)),
                           UpdateGameForm(
-                              gameNameController: gameNameController,
-                              percentageController: percentageController,
-                              game: Game(1, "To the moon", 100))
+                              //gameNameController: gameNameController,
+                              //percentageController: percentageController,
+                              game: game)
                         ],
                       ),
                       const Positioned(

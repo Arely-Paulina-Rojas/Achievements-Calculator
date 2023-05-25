@@ -7,14 +7,13 @@ import '../constants.dart';
 
 class UpdateGameForm extends StatelessWidget {
   final Game? game;
-  final TextEditingController gameNameController;
-  final TextEditingController percentageController;
-  const UpdateGameForm(
-      {Key? key,
-      required this.game,
-      required this.gameNameController,
-      required this.percentageController})
-      : super(key: key);
+  final TextEditingController gameNameController = TextEditingController();
+  final TextEditingController percentageController = TextEditingController();
+
+  UpdateGameForm({
+    Key? key,
+    required this.game,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
