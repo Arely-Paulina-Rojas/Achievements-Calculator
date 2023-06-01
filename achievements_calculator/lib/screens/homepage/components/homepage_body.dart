@@ -24,7 +24,7 @@ class HomepageBody extends StatelessWidget {
       child: Column(children: <Widget>[
         SizedBox(height: 10),
         _textsHeader(context),
-        _yourGameList(context)
+        _yourGameList(context),
       ]),
     ));
   }

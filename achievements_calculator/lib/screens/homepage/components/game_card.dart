@@ -53,7 +53,7 @@ class GameCard extends StatelessWidget {
           style: const TextStyle(
               color: lightTextColor, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Text(
           game!.percentage.toString() + "%",
           style: const TextStyle(
@@ -73,7 +73,7 @@ class GameCard extends StatelessWidget {
 
   Widget _iconsOptions(context) {
     return Padding(
-      padding: EdgeInsets.only(top: 20.0, right: 20.0),
+      padding: const EdgeInsets.only(top: 20.0, right: 20.0),
       child: Column(
         children: <Widget>[
           GestureDetector(
@@ -82,8 +82,8 @@ class GameCard extends StatelessWidget {
               customShowUpdateGameDialog(context, game);
             },
           ),
-          SizedBox(height: 3),
-          Icon(
+          const SizedBox(height: 3),
+          const Icon(
             Icons.delete,
             color: lightDarkTextColor,
           )

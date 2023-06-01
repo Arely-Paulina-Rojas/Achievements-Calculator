@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 void customShowUpdateGameDialog(
   BuildContext context,
   Game game,
-  //TextEditingController gameNameController,
-  //TextEditingController percentageController
 ) {
   showGeneralDialog(
       barrierDismissible: true,
@@ -47,10 +45,7 @@ void customShowUpdateGameDialog(
                           ),
                           const Padding(
                               padding: EdgeInsets.symmetric(vertical: 16)),
-                          UpdateGameForm(
-                              //gameNameController: gameNameController,
-                              //percentageController: percentageController,
-                              game: game)
+                          UpdateGameForm(game: game)
                         ],
                       ),
                       const Positioned(

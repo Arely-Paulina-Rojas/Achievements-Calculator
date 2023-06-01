@@ -3,10 +3,7 @@ import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/database/common/user.dart';
 import 'package:flutter/material.dart';
 
-void customShowUpdateUserDialog(
-    BuildContext context,
-    TextEditingController nickNameController,
-    TextEditingController passwordController) {
+void customShowUpdateUserDialog(BuildContext context, User user) {
   showGeneralDialog(
       barrierDismissible: true,
       barrierLabel: "Update profile",
@@ -24,7 +21,7 @@ void customShowUpdateUserDialog(
       },
       pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 350,
+              height: 370,
               margin: const EdgeInsets.symmetric(horizontal: 26),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: const BoxDecoration(color: formBackgroundColor),
@@ -45,10 +42,7 @@ void customShowUpdateUserDialog(
                           ),
                           const Padding(
                               padding: EdgeInsets.symmetric(vertical: 16)),
-                          UpdateUserForm(
-                              nickNameController: nickNameController,
-                              passwordController: passwordController,
-                              user: User(1, "Arely Paulina", "amarillo"))
+                          UpdateUserForm(user: user)
                         ],
                       ),
                       const Positioned(

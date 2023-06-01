@@ -19,8 +19,8 @@ class OnboardingScreen extends StatelessWidget {
           MainButton(
               text: "Pruebita",
               press: () {
-                customShowUpdateUserDialog(
-                    context, gameNameController, percengateController);
+                /* customShowUpdateUserDialog(
+                    context, gameNameController, percengateController);*/
               },
               lightColor: lightMainButtonColor,
               darkColor: darkMainButtonColor)

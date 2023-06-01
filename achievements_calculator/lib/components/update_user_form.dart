@@ -7,14 +7,9 @@ import '../constants.dart';
 
 class UpdateUserForm extends StatelessWidget {
   final User? user;
-  final TextEditingController nickNameController;
-  final TextEditingController passwordController;
-  const UpdateUserForm(
-      {Key? key,
-      required this.user,
-      required this.nickNameController,
-      required this.passwordController})
-      : super(key: key);
+  final TextEditingController nickNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  UpdateUserForm({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

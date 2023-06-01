@@ -5,13 +5,9 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class AddGameForm extends StatelessWidget {
-  final TextEditingController gameNameController;
-  final TextEditingController percentageController;
-  const AddGameForm(
-      {Key? key,
-      required this.gameNameController,
-      required this.percentageController})
-      : super(key: key);
+  final TextEditingController gameNameController = TextEditingController();
+  final TextEditingController percentageController = TextEditingController();
+  AddGameForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
