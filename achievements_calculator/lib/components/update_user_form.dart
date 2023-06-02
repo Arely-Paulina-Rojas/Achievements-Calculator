@@ -1,4 +1,3 @@
-import 'package:achievements_calculator/components/image_button.dart';
 import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
 import 'package:achievements_calculator/database/common/user.dart';
@@ -18,7 +17,7 @@ class UpdateUserForm extends StatelessWidget {
         children: [
           InputField(
               onChanged: (value) {},
-              controller: nickNameController..text = user!.nickName ?? "",
+              controller: nickNameController..text = user!.nickname ?? "",
               labelName: "NICKNAME",
               lightColor: lightMainButtonColor,
               darkColor: darkMainButtonColor,
