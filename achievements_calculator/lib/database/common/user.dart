@@ -4,10 +4,9 @@ class User {
 
   User(this.id, this.nickname, this.password);
 
-  User.fromMap(dynamic obj) {
-    this.id = obj['id'];
-    this.nickname = obj['nickname'];
-    this.password = obj['password'];
+  factory User.fromJson(Map<String, dynamic> parsedJson) {
+    return User(
+        parsedJson['id'], parsedJson['nickname'], parsedJson['password']);
   }
 
   String get _nickname => nickname;

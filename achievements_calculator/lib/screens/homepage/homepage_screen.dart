@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import '../login/login_screen.dart';
 
 class HomepageScreen extends StatelessWidget {
-  HomepageScreen({Key? key}) : super(key: key);
+  final User? user;
+  HomepageScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
@@ -42,7 +43,9 @@ class HomepageScreen extends StatelessWidget {
           }
         },
       ),
-      body: HomepageBody(),
+      body: HomepageBody(
+        user: user,
+      ),
     );
   }
 }

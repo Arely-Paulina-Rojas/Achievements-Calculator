@@ -48,23 +48,26 @@ class ContainerForm extends StatelessWidget {
                 press: () async {
                   if (validateForm(nicknameTextController.text,
                       passwordTextController.text)) {
-                    bool validacion = await SQLHelper.validateNickname(
+                    bool validation = await SQLHelper.validateNickname(
                         nicknameTextController.text);
-                    if (validacion) {
+                    if (validation) {
                       final user = User(null, nicknameTextController.text,
                           passwordTextController.text);
-                      int idUser = await SQLHelper.createUser(user);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      await SQLHelper.createUser(user);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Success!"),
                       ));
-                      print(await SQLHelper.getAllUsers());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()));
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Nickname already in use!"),
                       ));
                     }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
                           "No se ha podido crear el usuario, falta campos por llenar"),
                     ));

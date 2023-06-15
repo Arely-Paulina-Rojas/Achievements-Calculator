@@ -2,9 +2,11 @@ import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/screens/homepage/components/game_list.dart';
 import 'package:flutter/material.dart';
 import '../../../database/common/game.dart';
+import '../../../database/common/user.dart';
 import 'background.dart';
 
 class HomepageBody extends StatelessWidget {
+  final User? user;
   List<Game> tempYourGamesList = [
     Game(1, "assets/icons/game.png", "To the moon", 100),
     Game(2, "assets/icons/game.png", "Mortal Kombat Komplete Edition", 58),
@@ -14,7 +16,7 @@ class HomepageBody extends StatelessWidget {
     Game(6, "assets/icons/game.png", "Tembo The Badass Elephant", 100),
   ];
 
-  HomepageBody({Key? key}) : super(key: key);
+  HomepageBody({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
