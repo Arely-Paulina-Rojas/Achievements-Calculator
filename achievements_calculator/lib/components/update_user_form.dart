@@ -3,6 +3,7 @@ import 'package:achievements_calculator/components/main_button.dart';
 import 'package:achievements_calculator/components/update_game_form.dart';
 import 'package:achievements_calculator/database/common/user.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
@@ -46,7 +47,10 @@ class UpdateUserForm extends StatelessWidget {
                     await SQLHelper.updateUser(user);
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Success!")));
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomepageScreen(user: user)));
                   } else {
                     Flushbar(
                       backgroundColor: Colors.red,
