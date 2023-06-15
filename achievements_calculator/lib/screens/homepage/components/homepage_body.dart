@@ -6,7 +6,7 @@ import '../../../database/common/user.dart';
 import 'background.dart';
 
 class HomepageBody extends StatelessWidget {
-  final User? user;
+  final User user;
   List<Game> tempYourGamesList = [
     Game(1, "assets/icons/game.png", "To the moon", 100),
     Game(2, "assets/icons/game.png", "Mortal Kombat Komplete Edition", 58),

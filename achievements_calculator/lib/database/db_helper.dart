@@ -84,6 +84,17 @@ class SQLHelper {
     }
   }
 
+  static Future<bool> validateUpdateNickname(String nickname, int? id) async {
+    final db = await SQLHelper.db();
+    final List<Map<String, dynamic>> result = await db.query('user',
+        where: "nickname = ? and id <> ?", whereArgs: [nickname, id], limit: 1);
+    if (result.isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static Future<List<Map<String, dynamic>>> getSingleGame(int id) async {
     final db = await SQLHelper.db();
     return db.query('game', where: "id = ?", whereArgs: [id], limit: 1);
@@ -113,16 +124,15 @@ class SQLHelper {
   }
   */
 
-  static Future<int> updateUser(
-      int id, String nickname, String password) async {
+  static Future<int> updateUser(User user) async {
     final db = await SQLHelper.db();
-    final user = {
-      'nickname': nickname,
-      'password': password,
+    final userData = {
+      'nickname': user.nickname,
+      'password': user.password,
       'createdAt': DateTime.now().toString()
     };
-    final result =
-        await db.update('user', user, where: "id = ?", whereArgs: [id]);
+    final result = await db
+        .update('user', userData, where: "id = ?", whereArgs: [user.id]);
     return result;
   }
 

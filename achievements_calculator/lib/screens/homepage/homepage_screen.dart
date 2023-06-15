@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import '../login/login_screen.dart';
 
 class HomepageScreen extends StatelessWidget {
-  final User? user;
+  final User user;
   HomepageScreen({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class HomepageScreen extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              customShowUpdateUserDialog(context, User(1, "Arely", "1234"));
+              customShowUpdateUserDialog(context, user!);
               print(1);
               break;
             case 1:
