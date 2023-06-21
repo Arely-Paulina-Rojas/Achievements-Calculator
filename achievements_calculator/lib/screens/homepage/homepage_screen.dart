@@ -2,6 +2,7 @@ import 'package:achievements_calculator/components/custom_show_add_game_dialog.d
 import 'package:achievements_calculator/components/custom_show_update_user_dialog.dart';
 import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/database/common/user.dart';
+import 'package:achievements_calculator/database/db_helper.dart';
 import 'package:achievements_calculator/screens/homepage/components/homepage_body.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +28,11 @@ class HomepageScreen extends StatelessWidget {
             color: lightTextColor,
           )
         ],
-        onTap: (index) {
+        onTap: (index) async {
           switch (index) {
             case 0:
-              customShowUpdateUserDialog(context, user!);
+              User? profileUser = await SQLHelper.getSingleUser(user.id!);
+              customShowUpdateUserDialog(context, profileUser!);
               print(1);
               break;
             case 1:

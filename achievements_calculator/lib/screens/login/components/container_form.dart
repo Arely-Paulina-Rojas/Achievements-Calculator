@@ -74,8 +74,7 @@ class ContainerForm extends StatelessWidget {
                     }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text(
-                          "No se ha podido crear el usuario, falta campos por llenar"),
+                      content: Text("Fill all the fields!"),
                     ));
                   }
                 },

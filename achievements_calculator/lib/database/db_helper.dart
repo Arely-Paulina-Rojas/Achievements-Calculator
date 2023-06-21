@@ -68,10 +68,20 @@ class SQLHelper {
     return db.query('game', where: "idUser = ?", whereArgs: [idUser]);
   }
 
-  static Future<List<Map<String, dynamic>>> getSingleUser(int id) async {
+  static Future<User?> getSingleUser(int id) async {
+    final db = await SQLHelper.db();
+    final List<Map<String, dynamic>> result =
+        await db.query('user', where: "id = ?", whereArgs: [id], limit: 1);
+    if (result.isNotEmpty) {
+      return User.fromJson(result[0]);
+    } else {
+      return null;
+    }
+  }
+  /* static Future<List<Map<String, dynamic>>> getSingleUser(int id) async {
     final db = await SQLHelper.db();
     return db.query('user', where: "id = ?", whereArgs: [id], limit: 1);
-  }
+  } */
 
   static Future<bool> validateNickname(String nickname) async {
     final db = await SQLHelper.db();

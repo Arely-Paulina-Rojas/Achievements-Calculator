@@ -44,13 +44,10 @@ class UpdateUserForm extends StatelessWidget {
                   if (validation) {
                     final user = User(this.user?.id, nickNameController.text,
                         passwordController.text);
-                    await SQLHelper.updateUser(user);
+                    print(await SQLHelper.updateUser(user));
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Success!")));
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomepageScreen(user: user)));
+                    Navigator.pop(context);
                   } else {
                     Flushbar(
                       backgroundColor: Colors.red,
