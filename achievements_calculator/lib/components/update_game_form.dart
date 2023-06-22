@@ -26,7 +26,8 @@ class UpdateGameForm extends StatelessWidget {
               labelName: "GAME NAME",
               lightColor: lightMainButtonColor,
               darkColor: darkMainButtonColor,
-              isPasswordField: false),
+              isPasswordField: false,
+              inputType: TextInputType.text),
           InputField(
               onChanged: (value) {},
               controller: percentageController
@@ -34,7 +35,8 @@ class UpdateGameForm extends StatelessWidget {
               labelName: "PERCENGATE",
               lightColor: lightDarkTextColor,
               darkColor: lightDarkTextColor,
-              isPasswordField: false),
+              isPasswordField: false,
+              inputType: TextInputType.number),
           ImageButton(labelText: "IMAGE", buttonText: "+", press: () {}),
           const SizedBox(height: 10),
           MainButton(

@@ -25,14 +25,16 @@ class UpdateUserForm extends StatelessWidget {
               labelName: "NICKNAME",
               lightColor: lightMainButtonColor,
               darkColor: darkMainButtonColor,
-              isPasswordField: false),
+              isPasswordField: false,
+              inputType: TextInputType.text),
           InputField(
               onChanged: (value) {},
               controller: passwordController..text = user!.password ?? "",
               labelName: "PASSWORD",
               lightColor: lightDarkTextColor,
               darkColor: lightDarkTextColor,
-              isPasswordField: true),
+              isPasswordField: true,
+              inputType: TextInputType.text),
           const SizedBox(height: 10),
           MainButton(
               text: "Save",
@@ -44,10 +46,14 @@ class UpdateUserForm extends StatelessWidget {
                   if (validation) {
                     final user = User(this.user?.id, nickNameController.text,
                         passwordController.text);
-                    print(await SQLHelper.updateUser(user));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Success!")));
-                    Navigator.pop(context);
+                    Flushbar(
+                      backgroundColor: Colors.red,
+                      message: "Success!",
+                      duration: Duration(seconds: 1),
+                    ).show(context);
+                    Future.delayed(Duration(seconds: 1), () {
+                      Navigator.pop(context);
+                    });
                   } else {
                     Flushbar(
                       backgroundColor: Colors.red,
@@ -58,12 +64,9 @@ class UpdateUserForm extends StatelessWidget {
                 } else {
                   Flushbar(
                     backgroundColor: Colors.red,
-                    message: "Empty fields",
+                    message: "Fill all the fields!",
                     duration: Duration(seconds: 3),
                   ).show(context);
-                  /*
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Empty fields!")));*/
                 }
               },
               lightColor: lightMainButtonColor,

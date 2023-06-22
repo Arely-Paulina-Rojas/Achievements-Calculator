@@ -10,6 +10,7 @@ class InputField extends StatelessWidget {
   final bool isPasswordField;
   final Color lightColor;
   final Color darkColor;
+  final TextInputType inputType;
   const InputField(
       {Key? key,
       required this.onChanged,
@@ -17,7 +18,8 @@ class InputField extends StatelessWidget {
       required this.labelName,
       required this.lightColor,
       required this.darkColor,
-      required this.isPasswordField})
+      required this.isPasswordField,
+      required this.inputType})
       : super(key: key);
 
   @override
@@ -38,6 +40,7 @@ class InputField extends StatelessWidget {
             border: InputBorder.none,
           ),
           controller: controller,
+          keyboardType: inputType,
         ))
       ],
     ));

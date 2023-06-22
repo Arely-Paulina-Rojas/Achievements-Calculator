@@ -3,6 +3,7 @@ import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
 import 'package:achievements_calculator/screens/login/login_screen.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../database/common/user.dart';
@@ -31,7 +32,8 @@ class ContainerForm extends StatelessWidget {
                   labelName: "YOUR NICKNAME",
                   lightColor: lightMainButtonColor,
                   darkColor: darkMainButtonColor,
-                  isPasswordField: false),
+                  isPasswordField: false,
+                  inputType: TextInputType.text),
               SizedBox(height: size.width * 0.02),
               InputField(
                 onChanged: (value) {},
@@ -40,6 +42,7 @@ class ContainerForm extends StatelessWidget {
                 isPasswordField: true,
                 lightColor: lightDarkTextColor,
                 darkColor: lightDarkTextColor,
+                inputType: TextInputType.text,
               ),
               MainButton(
                 text: 'Sign Up',
@@ -54,23 +57,40 @@ class ContainerForm extends StatelessWidget {
                       final user = User(null, nicknameTextController.text,
                           passwordTextController.text);
                       await SQLHelper.createUser(user);
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      /*ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Success!"),
-                      ));
+                      ));*/
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const LoginScreen()));
+                      Flushbar(
+                        backgroundColor: Colors.red,
+                        message: "Success!",
+                        duration: Duration(seconds: 3),
+                      ).show(context);
                     } else {
+                      /*
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Nickname already in use!"),
-                      ));
+                      ));*/
+                      Flushbar(
+                        backgroundColor: Colors.red,
+                        message: "Nickname already in use!",
+                        duration: Duration(seconds: 3),
+                      ).show(context);
                     }
                   } else {
+                    Flushbar(
+                      backgroundColor: Colors.red,
+                      message: "Fill all the fields!",
+                      duration: Duration(seconds: 3),
+                    ).show(context);
+                    /*
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
                           "No se ha podido crear el usuario, falta campos por llenar"),
-                    ));
+                    ));*/
                   }
                 },
               ),

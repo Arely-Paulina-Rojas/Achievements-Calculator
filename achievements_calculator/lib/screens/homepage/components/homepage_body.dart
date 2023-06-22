@@ -8,12 +8,12 @@ import 'background.dart';
 class HomepageBody extends StatelessWidget {
   final User user;
   List<Game> tempYourGamesList = [
-    Game(1, "assets/icons/game.png", "To the moon", 100),
-    Game(2, "assets/icons/game.png", "Mortal Kombat Komplete Edition", 58),
-    Game(3, "assets/icons/game.png", "Papers, Please", 84),
-    Game(4, "assets/icons/game.png", "Metro 2033 Redux", 100),
-    Game(5, "assets/icons/game.png", "Pony Island", 100),
-    Game(6, "assets/icons/game.png", "Tembo The Badass Elephant", 100),
+    Game(1, "assets/icons/game.png", "To the moon", 100, 1),
+    Game(2, "assets/icons/game.png", "Mortal Kombat Komplete Edition", 58, 1),
+    Game(3, "assets/icons/game.png", "Papers, Please", 84, 1),
+    Game(4, "assets/icons/game.png", "Metro 2033 Redux", 100, 1),
+    Game(5, "assets/icons/game.png", "Pony Island", 100, 1),
+    Game(6, "assets/icons/game.png", "Tembo The Badass Elephant", 100, 1),
   ];
 
   HomepageBody({Key? key, required this.user}) : super(key: key);

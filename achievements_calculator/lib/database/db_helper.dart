@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'package:sqflite/sqflite.dart' as sql;
+import 'common/game.dart';
 import 'common/user.dart';
 
 class SQLHelper {
@@ -14,6 +16,7 @@ class SQLHelper {
 
     await databaseAchievementsCalculator.execute("""CREATE TABLE game (
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+          image TEXT,
           name TEXT NOT NULL,
           percentage REAL NOT NULL,
           idUser INTEGER,
@@ -47,6 +50,14 @@ class SQLHelper {
     return id;
   }
 
+  static Future<int> createGame(Game game) async {
+    final db = await SQLHelper.db();
+    final id = await db.insert("game", game.toMap(),
+        conflictAlgorithm: sql.ConflictAlgorithm.replace);
+    return id;
+  }
+
+  /*
   static Future<int> createGame(
       String name, double percentage, int idUser) async {
     final db = await SQLHelper.db();
@@ -55,18 +66,26 @@ class SQLHelper {
     final id = await db.insert('game', game,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return id;
-  }
+  } */
 
   static Future<List<Map<String, dynamic>>> getAllUsers() async {
     final db = await SQLHelper.db();
     return db.query('user', orderBy: 'id');
   }
 
+  static Future<List<Game>?> getAllGamesByUser(int idUser) async {
+    final db = await SQLHelper.db();
+    final List<Map<String, dynamic>> result =
+        await db.query('game', where: "idUser = ?", whereArgs: [idUser]);
+    if (result.isEmpty) return List.empty();
+    return result.map((e) => Game.fromJson(e)).toList();
+  }
+  /*
   static Future<List<Map<String, dynamic>>> getAllGamesByUser(
       int idUser) async {
     final db = await SQLHelper.db();
     return db.query('game', where: "idUser = ?", whereArgs: [idUser]);
-  }
+  }*/
 
   static Future<User?> getSingleUser(int id) async {
     final db = await SQLHelper.db();

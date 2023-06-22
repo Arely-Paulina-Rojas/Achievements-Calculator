@@ -4,6 +4,7 @@ import 'package:achievements_calculator/components/main_button.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
 import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:achievements_calculator/screens/signup/signup_screen.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../database/common/user.dart';
@@ -32,7 +33,8 @@ class ContainerForm extends StatelessWidget {
                   labelName: "YOUR NICKNAME",
                   lightColor: lightMainButtonColor,
                   darkColor: darkMainButtonColor,
-                  isPasswordField: false),
+                  isPasswordField: false,
+                  inputType: TextInputType.text),
               SizedBox(height: size.width * 0.02),
               InputField(
                 onChanged: (value) {},
@@ -41,6 +43,7 @@ class ContainerForm extends StatelessWidget {
                 isPasswordField: true,
                 lightColor: lightDarkTextColor,
                 darkColor: lightDarkTextColor,
+                inputType: TextInputType.text,
               ),
               MainButton(
                 text: 'Login',
@@ -56,26 +59,50 @@ class ContainerForm extends StatelessWidget {
                           passwordTextController.text);
                       User? userLogin = await SQLHelper.login(user);
                       if (userLogin != null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Welcome!")));
+                        /*ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Welcome!")));*/
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
                                     HomepageScreen(user: userLogin)));
+                        Flushbar(
+                          backgroundColor: Colors.red,
+                          message: "Welcome " + userLogin.nickname + "!",
+                          duration: Duration(seconds: 3),
+                        ).show(context);
+                        FocusScope.of(context).requestFocus(new FocusNode());
                       } else {
+                        Flushbar(
+                          backgroundColor: Colors.red,
+                          message: "Incorrect password!",
+                          duration: Duration(seconds: 3),
+                        ).show(context);
+                        /*
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text("Incorrect password!")));
+                                content: Text("Incorrect password!")));*/
                       }
                     } else {
+                      Flushbar(
+                        backgroundColor: Colors.red,
+                        message: "Account doesn't exist",
+                        duration: Duration(seconds: 3),
+                      ).show(context);
+                      /*
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Account doesn't exist")));
+                          content: Text("Account doesn't exist")));*/
                     }
                   } else {
+                    Flushbar(
+                      backgroundColor: Colors.red,
+                      message: "Fill all the fields!",
+                      duration: Duration(seconds: 3),
+                    ).show(context);
+                    /*
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Fill all the fields!"),
-                    ));
+                    ));*/
                   }
                 },
               ),
