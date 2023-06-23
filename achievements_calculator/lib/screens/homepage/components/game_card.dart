@@ -106,9 +106,10 @@ class GameCard extends StatelessWidget {
         builder: (buildcontext) {
           return AlertDialog(
             backgroundColor: cardBackgroundColor,
-            title:
-                Text("Confirmation", style: TextStyle(color: lightTextColor)),
-            content: Text("Would you like to remove the game from the list?",
+            title: const Text("Confirmation",
+                style: TextStyle(color: lightTextColor)),
+            content: const Text(
+                "Would you like to remove the game from the list?",
                 style: TextStyle(color: lightTextColor)),
             actions: <Widget>[
               TextButton(

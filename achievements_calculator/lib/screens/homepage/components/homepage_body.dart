@@ -30,14 +30,15 @@ class HomepageBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const <Widget>[
-          Text(
+        children: <Widget>[
+          _loadAverage(context),
+          /*Text(
             "80%",
             style: TextStyle(
                 color: lightTextColor,
                 fontSize: 30,
                 fontWeight: FontWeight.bold),
-          ),
+          ),*/
           SizedBox(height: 5),
           Text(
             "Avg. Game Completion Rate",
@@ -60,6 +61,31 @@ class HomepageBody extends StatelessWidget {
           }
           return const Center(child: CircularProgressIndicator());
         });
+  }
+  /*
+  Future _loadAverage() async {
+    print(await SQLHelper.caculateAverage(user.id!));
+    _yourAverage("context");
+  }*/
+
+  Widget _loadAverage(context) {
+    return FutureBuilder(
+        future: SQLHelper.caculateAverage(user.id!),
+        builder: (BuildContext context, AsyncSnapshot<double> model) {
+          if (model.hasData) {
+            print(model.data);
+            return _yourAverage(model.data);
+          }
+          return const Center(child: CircularProgressIndicator());
+        });
+  }
+
+  Widget _yourAverage(context) {
+    return Text(
+      context.toString() + "%",
+      style: TextStyle(
+          color: lightTextColor, fontSize: 30, fontWeight: FontWeight.bold),
+    );
   }
 
   Widget _yourGameList(context) {

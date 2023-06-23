@@ -195,11 +195,12 @@ class SQLHelper {
     }
   }
 
-  static Future<List<Map<String, dynamic>>> caculateAverage(int idUser) async {
+  static Future<double> caculateAverage(int idUser) async {
     final db = await SQLHelper.db();
-    final result = await db.rawQuery(
+    final List<Map<String, dynamic>> result = await db.rawQuery(
         "SELECT AVG(percentage) AS average FROM game  WHERE idUser = " +
             idUser.toString());
-    return result;
+    if (result[0]['average'] == null) return 0;
+    return result[0]['average'];
   }
 }
