@@ -36,7 +36,7 @@ class HomepageScreen extends StatelessWidget {
               print(1);
               break;
             case 1:
-              customShowAddGameDialog(context);
+              customShowAddGameDialog(context, user!);
               break;
             case 2:
               Navigator.push(context,

@@ -1,4 +1,5 @@
 import 'package:achievements_calculator/constants.dart';
+import 'package:achievements_calculator/database/db_helper.dart';
 import 'package:achievements_calculator/screens/homepage/components/game_list.dart';
 import 'package:flutter/material.dart';
 import '../../../database/common/game.dart';
@@ -7,14 +8,6 @@ import 'background.dart';
 
 class HomepageBody extends StatelessWidget {
   final User user;
-  List<Game> tempYourGamesList = [
-    Game(1, "assets/icons/game.png", "To the moon", 100, 1),
-    Game(2, "assets/icons/game.png", "Mortal Kombat Komplete Edition", 58, 1),
-    Game(3, "assets/icons/game.png", "Papers, Please", 84, 1),
-    Game(4, "assets/icons/game.png", "Metro 2033 Redux", 100, 1),
-    Game(5, "assets/icons/game.png", "Pony Island", 100, 1),
-    Game(6, "assets/icons/game.png", "Tembo The Badass Elephant", 100, 1),
-  ];
 
   HomepageBody({Key? key, required this.user}) : super(key: key);
 
@@ -26,7 +19,8 @@ class HomepageBody extends StatelessWidget {
       child: Column(children: <Widget>[
         SizedBox(height: 10),
         _textsHeader(context),
-        _yourGameList(context),
+        _loadGames()
+        //_yourGameList(context),
       ]),
     ));
   }
@@ -57,13 +51,24 @@ class HomepageBody extends StatelessWidget {
     );
   }
 
+  Widget _loadGames() {
+    return FutureBuilder(
+        future: SQLHelper.getAllGamesByUser(user.id!),
+        builder: (BuildContext context, AsyncSnapshot<List<Game>?> model) {
+          if (model.hasData) {
+            return _yourGameList(model.data);
+          }
+          return const Center(child: CircularProgressIndicator());
+        });
+  }
+
   Widget _yourGameList(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: GameList(games: tempYourGamesList))
+            child: GameList(games: context))
       ],
     );
   }

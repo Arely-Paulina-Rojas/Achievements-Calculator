@@ -1,14 +1,19 @@
 import 'package:achievements_calculator/components/image_button.dart';
 import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
+import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import '../database/common/game.dart';
+import '../database/common/user.dart';
 
 class AddGameForm extends StatelessWidget {
+  final User user;
   final TextEditingController gameNameController = TextEditingController();
   final TextEditingController percentageController = TextEditingController();
-  AddGameForm({Key? key}) : super(key: key);
+  AddGameForm({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +40,29 @@ class AddGameForm extends StatelessWidget {
           const SizedBox(height: 10),
           MainButton(
               text: "Save",
-              press: () {
+              press: () async {
                 if (validateForm(
                     gameNameController.text, percentageController.text)) {
                   if (validateNumber(percentageController.text)) {
+                    final game = Game(
+                        null,
+                        "assets/icons/game.png",
+                        gameNameController.text,
+                        double.parse(percentageController.text),
+                        this.user.id!);
+                    await SQLHelper.createGame(game);
+                    /*Flushbar(
+                      backgroundColor: Colors.red,
+                      message: "Nickname already in use!",
+                      duration: Duration(seconds: 3),
+                    ).show(context);*/
+
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                HomepageScreen(user: this.user)),
+                        (Route<dynamic> route) => false);
                   } else {
                     Flushbar(
                       backgroundColor: Colors.red,

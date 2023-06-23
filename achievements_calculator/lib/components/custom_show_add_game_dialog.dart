@@ -1,8 +1,9 @@
 import 'package:achievements_calculator/components/add_game_form.dart';
 import 'package:achievements_calculator/constants.dart';
 import 'package:flutter/material.dart';
+import '../database/common/user.dart';
 
-void customShowAddGameDialog(BuildContext context) {
+void customShowAddGameDialog(BuildContext context, User user) {
   showGeneralDialog(
       barrierDismissible: true,
       barrierLabel: "Add game",
@@ -41,7 +42,9 @@ void customShowAddGameDialog(BuildContext context) {
                           ),
                           const Padding(
                               padding: EdgeInsets.symmetric(vertical: 16)),
-                          AddGameForm()
+                          AddGameForm(
+                            user: user,
+                          )
                         ],
                       ),
                       const Positioned(

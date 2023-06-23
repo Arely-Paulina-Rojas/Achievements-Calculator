@@ -1,7 +1,10 @@
 import 'package:achievements_calculator/constants.dart';
+import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_show_update_game_dialog.dart';
 import '../../../database/common/game.dart';
+import '../../../database/common/user.dart';
 
 class GameCard extends StatelessWidget {
   final Game game;
@@ -83,12 +86,54 @@ class GameCard extends StatelessWidget {
             },
           ),
           const SizedBox(height: 3),
-          const Icon(
-            Icons.delete,
-            color: lightDarkTextColor,
+          GestureDetector(
+            child: const Icon(
+              Icons.delete,
+              color: lightDarkTextColor,
+            ),
+            onTap: () async {
+              _showAlertDialog(context);
+            },
           )
         ],
       ),
     );
+  }
+
+  void _showAlertDialog(context) {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            backgroundColor: cardBackgroundColor,
+            title:
+                Text("Confirmation", style: TextStyle(color: lightTextColor)),
+            content: Text("Would you like to remove the game from the list?",
+                style: TextStyle(color: lightTextColor)),
+            actions: <Widget>[
+              TextButton(
+                  child: const Text(
+                    "Yes",
+                    style: TextStyle(color: lightMainButtonColor),
+                  ),
+                  onPressed: () async {
+                    await SQLHelper.deleteGame(game.id!);
+                    User? user = await SQLHelper.getSingleUser(game.idUser);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                HomepageScreen(user: user!)),
+                        (Route<dynamic> route) => false);
+                  }),
+              TextButton(
+                  child: const Text("No",
+                      style: TextStyle(color: lightDarkTextColor)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  })
+            ],
+          );
+        });
   }
 }
