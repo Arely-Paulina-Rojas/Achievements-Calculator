@@ -51,36 +51,31 @@ class AddGameForm extends StatelessWidget {
                         double.parse(percentageController.text),
                         this.user.id!);
                     await SQLHelper.createGame(game);
-                    /*Flushbar(
-                      backgroundColor: Colors.red,
-                      message: "Nickname already in use!",
-                      duration: Duration(seconds: 3),
-                    ).show(context);*/
-
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 HomepageScreen(user: this.user)),
                         (Route<dynamic> route) => false);
+                    Flushbar(
+                      backgroundColor: successMessageColor,
+                      message: "Success!",
+                      duration: Duration(seconds: 3),
+                    ).show(context);
                   } else {
                     Flushbar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: errorMessageColor,
                       message: "Enter a valid percentage!",
                       duration: Duration(seconds: 3),
                     ).show(context);
                   }
                 } else {
                   Flushbar(
-                    backgroundColor: Colors.red,
+                    backgroundColor: errorMessageColor,
                     message: "Fill all the fields!",
                     duration: Duration(seconds: 3),
                   ).show(context);
                 }
-                /*
-                Future.delayed(Duration(seconds: 3), () {
-                  Navigator.pop(context); 
-                });*/
               },
               lightColor: lightMainButtonColor,
               darkColor: darkMainButtonColor)

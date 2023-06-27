@@ -57,40 +57,28 @@ class ContainerForm extends StatelessWidget {
                       final user = User(null, nicknameTextController.text,
                           passwordTextController.text);
                       await SQLHelper.createUser(user);
-                      /*ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Success!"),
-                      ));*/
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const LoginScreen()));
                       Flushbar(
-                        backgroundColor: Colors.red,
+                        backgroundColor: successMessageColor,
                         message: "Success!",
                         duration: Duration(seconds: 3),
                       ).show(context);
                     } else {
-                      /*
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Nickname already in use!"),
-                      ));*/
                       Flushbar(
-                        backgroundColor: Colors.red,
+                        backgroundColor: errorMessageColor,
                         message: "Nickname already in use!",
                         duration: Duration(seconds: 3),
                       ).show(context);
                     }
                   } else {
                     Flushbar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: errorMessageColor,
                       message: "Fill all the fields!",
                       duration: Duration(seconds: 3),
                     ).show(context);
-                    /*
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text(
-                          "No se ha podido crear el usuario, falta campos por llenar"),
-                    ));*/
                   }
                 },
               ),

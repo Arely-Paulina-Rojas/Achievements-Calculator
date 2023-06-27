@@ -20,7 +20,6 @@ class HomepageBody extends StatelessWidget {
         SizedBox(height: 10),
         _textsHeader(context),
         _loadGames()
-        //_yourGameList(context),
       ]),
     ));
   }
@@ -32,13 +31,6 @@ class HomepageBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           _loadAverage(context),
-          /*Text(
-            "80%",
-            style: TextStyle(
-                color: lightTextColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold),
-          ),*/
           SizedBox(height: 5),
           Text(
             "Avg. Game Completion Rate",
@@ -62,11 +54,6 @@ class HomepageBody extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         });
   }
-  /*
-  Future _loadAverage() async {
-    print(await SQLHelper.caculateAverage(user.id!));
-    _yourAverage("context");
-  }*/
 
   Widget _loadAverage(context) {
     return FutureBuilder(

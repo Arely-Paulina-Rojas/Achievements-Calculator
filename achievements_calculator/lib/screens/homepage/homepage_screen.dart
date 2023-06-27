@@ -6,7 +6,6 @@ import 'package:achievements_calculator/database/db_helper.dart';
 import 'package:achievements_calculator/screens/homepage/components/homepage_body.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import '../login/login_screen.dart';
 
 class HomepageScreen extends StatelessWidget {

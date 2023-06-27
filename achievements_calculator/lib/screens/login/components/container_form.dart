@@ -59,50 +59,37 @@ class ContainerForm extends StatelessWidget {
                           passwordTextController.text);
                       User? userLogin = await SQLHelper.login(user);
                       if (userLogin != null) {
-                        /*ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Welcome!")));*/
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
                                     HomepageScreen(user: userLogin)));
                         Flushbar(
-                          backgroundColor: Colors.red,
+                          backgroundColor: successMessageColor,
                           message: "Welcome " + userLogin.nickname + "!",
                           duration: Duration(seconds: 3),
                         ).show(context);
                         FocusScope.of(context).requestFocus(new FocusNode());
                       } else {
                         Flushbar(
-                          backgroundColor: Colors.red,
+                          backgroundColor: errorMessageColor,
                           message: "Incorrect password!",
                           duration: Duration(seconds: 3),
                         ).show(context);
-                        /*
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("Incorrect password!")));*/
                       }
                     } else {
                       Flushbar(
-                        backgroundColor: Colors.red,
+                        backgroundColor: errorMessageColor,
                         message: "Account doesn't exist",
                         duration: Duration(seconds: 3),
                       ).show(context);
-                      /*
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Account doesn't exist")));*/
                     }
                   } else {
                     Flushbar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: errorMessageColor,
                       message: "Fill all the fields!",
                       duration: Duration(seconds: 3),
                     ).show(context);
-                    /*
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Fill all the fields!"),
-                    ));*/
                   }
                 },
               ),

@@ -9,3 +9,5 @@ const Color lightDarkTextColor = Color(0xFFB4B4B4);
 const Color lightMainButtonColor = Color(0xFF0CC8F2);
 const Color darkMainButtonColor = Color(0xFF006EFF);
 const Color textFieldColor = Color(0xFF32353C);
+const Color errorMessageColor = Color(0xFFA63232);
+const Color successMessageColor = Color(0xFF84bc3c);

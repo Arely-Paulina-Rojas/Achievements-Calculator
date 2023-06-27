@@ -19,7 +19,6 @@ class MainButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
-        //height: 38,
         width: size.width * 0.7,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [lightColor, darkColor])),

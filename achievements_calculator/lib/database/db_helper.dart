@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:ffi';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'common/game.dart';
 import 'common/user.dart';
@@ -32,17 +30,6 @@ class SQLHelper {
     });
   }
 
-  /*
-  static Future<int> createUser(String nickname, String password) async {
-    final db = await SQLHelper.db();
-
-    final user = {'nickname': nickname, 'password': password};
-    final id = await db.insert('user', user,
-        conflictAlgorithm: sql.ConflictAlgorithm.replace);
-
-    return id;
-  } */
-
   static Future<int> createUser(User user) async {
     final db = await SQLHelper.db();
     final id = await db.insert("user", user.toMap(),
@@ -57,17 +44,6 @@ class SQLHelper {
     return id;
   }
 
-  /*
-  static Future<int> createGame(
-      String name, double percentage, int idUser) async {
-    final db = await SQLHelper.db();
-
-    final game = {'name': name, 'percentage': percentage, 'idUser': idUser};
-    final id = await db.insert('game', game,
-        conflictAlgorithm: sql.ConflictAlgorithm.replace);
-    return id;
-  } */
-
   static Future<List<Map<String, dynamic>>> getAllUsers() async {
     final db = await SQLHelper.db();
     return db.query('user', orderBy: 'id');
@@ -80,12 +56,6 @@ class SQLHelper {
     if (result.isEmpty) return List.empty();
     return result.map((e) => Game.fromJson(e)).toList();
   }
-  /*
-  static Future<List<Map<String, dynamic>>> getAllGamesByUser(
-      int idUser) async {
-    final db = await SQLHelper.db();
-    return db.query('game', where: "idUser = ?", whereArgs: [idUser]);
-  }*/
 
   static Future<User?> getSingleUser(int id) async {
     final db = await SQLHelper.db();
@@ -97,10 +67,6 @@ class SQLHelper {
       return null;
     }
   }
-  /* static Future<List<Map<String, dynamic>>> getSingleUser(int id) async {
-    final db = await SQLHelper.db();
-    return db.query('user', where: "id = ?", whereArgs: [id], limit: 1);
-  } */
 
   static Future<bool> validateNickname(String nickname) async {
     final db = await SQLHelper.db();
@@ -124,9 +90,12 @@ class SQLHelper {
     }
   }
 
-  static Future<List<Map<String, dynamic>>> getSingleGame(int id) async {
+  static Future<Game?> getSingleGame(int id) async {
     final db = await SQLHelper.db();
-    return db.query('game', where: "id = ?", whereArgs: [id], limit: 1);
+    final List<Map<String, dynamic>> result =
+        await db.query('game', where: "id = ?", whereArgs: [id], limit: 1);
+    if (result[0].isEmpty) return null;
+    return Game.fromJson(result[0]);
   }
 
   static Future<User?> login(User user) async {
@@ -142,17 +111,6 @@ class SQLHelper {
     }
   }
 
-  /*
-  static Future<List<Map<String, dynamic>>> login(
-      String nickname, String password) async {
-    final db = await SQLHelper.db();
-    return db.query('user',
-        where: "nickname = ? and password = ?",
-        whereArgs: [nickname, password],
-        limit: 1);
-  }
-  */
-
   static Future<int> updateUser(User user) async {
     final db = await SQLHelper.db();
     final userData = {
@@ -165,15 +123,16 @@ class SQLHelper {
     return result;
   }
 
-  static Future<int> updateGame(int id, String name, double percentage) async {
+  static Future<int> updateGame(Game game) async {
     final db = await SQLHelper.db();
-    final game = {
-      'name': name,
-      'percentage': percentage,
+    final gameData = {
+      'image': game.image,
+      'name': game.name,
+      'percentage': game.percentage,
       'createdAt': DateTime.now().toString()
     };
-    final result =
-        await db.update('game', game, where: "id = ?", whereArgs: [id]);
+    final result = await db
+        .update('game', gameData, where: "id = ?", whereArgs: [game.id]);
     return result;
   }
 

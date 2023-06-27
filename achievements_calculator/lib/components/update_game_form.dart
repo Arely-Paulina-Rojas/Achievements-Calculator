@@ -2,8 +2,12 @@ import 'package:achievements_calculator/components/image_button.dart';
 import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
 import 'package:achievements_calculator/database/common/game.dart';
+import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import '../database/common/user.dart';
 
 class UpdateGameForm extends StatelessWidget {
   final Game? game;
@@ -41,8 +45,44 @@ class UpdateGameForm extends StatelessWidget {
           const SizedBox(height: 10),
           MainButton(
               text: "Save",
-              press: () {
-                Navigator.pop(context);
+              press: () async {
+                if (validateForm(
+                    gameNameController.text, percentageController.text)) {
+                  if (validateNumber(percentageController.text)) {
+                    final game = Game(
+                        this.game!.id,
+                        "assets/icons/game.png",
+                        gameNameController.text,
+                        double.parse(percentageController.text),
+                        this.game!.idUser);
+                    await SQLHelper.updateGame(game);
+                    User? user =
+                        await SQLHelper.getSingleUser(this.game!.idUser);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                HomepageScreen(user: user!)),
+                        (Route<dynamic> route) => false);
+                    Flushbar(
+                      backgroundColor: successMessageColor,
+                      message: "Success!",
+                      duration: Duration(seconds: 3),
+                    ).show(context);
+                  } else {
+                    Flushbar(
+                      backgroundColor: errorMessageColor,
+                      message: "Enter a valid percentage!",
+                      duration: Duration(seconds: 3),
+                    ).show(context);
+                  }
+                } else {
+                  Flushbar(
+                    backgroundColor: errorMessageColor,
+                    message: "Fill all the fields!",
+                    duration: Duration(seconds: 3),
+                  ).show(context);
+                }
               },
               lightColor: lightMainButtonColor,
               darkColor: darkMainButtonColor)
@@ -50,4 +90,14 @@ class UpdateGameForm extends StatelessWidget {
       ),
     );
   }
+}
+
+bool validateForm(String name, String percentage) {
+  if (name.isNotEmpty && percentage.isNotEmpty) return true;
+  return false;
+}
+
+bool validateNumber(String percentage) {
+  if (double.tryParse(percentage) == null) return false;
+  return true;
 }

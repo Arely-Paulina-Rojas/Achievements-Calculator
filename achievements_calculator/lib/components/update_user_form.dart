@@ -1,9 +1,7 @@
 import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
-import 'package:achievements_calculator/components/update_game_form.dart';
 import 'package:achievements_calculator/database/common/user.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
-import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
@@ -46,8 +44,9 @@ class UpdateUserForm extends StatelessWidget {
                   if (validation) {
                     final user = User(this.user?.id, nickNameController.text,
                         passwordController.text);
+                    await SQLHelper.updateUser(user);
                     Flushbar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: successMessageColor,
                       message: "Success!",
                       duration: Duration(seconds: 1),
                     ).show(context);
@@ -56,14 +55,14 @@ class UpdateUserForm extends StatelessWidget {
                     });
                   } else {
                     Flushbar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: errorMessageColor,
                       message: "Nickname already in user!",
                       duration: Duration(seconds: 3),
                     ).show(context);
                   }
                 } else {
                   Flushbar(
-                    backgroundColor: Colors.red,
+                    backgroundColor: errorMessageColor,
                     message: "Fill all the fields!",
                     duration: Duration(seconds: 3),
                   ).show(context);

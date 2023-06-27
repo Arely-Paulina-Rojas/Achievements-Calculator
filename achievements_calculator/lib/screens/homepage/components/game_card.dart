@@ -1,6 +1,7 @@
 import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
 import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_show_update_game_dialog.dart';
 import '../../../database/common/game.dart';
@@ -126,6 +127,11 @@ class GameCard extends StatelessWidget {
                             builder: (BuildContext context) =>
                                 HomepageScreen(user: user!)),
                         (Route<dynamic> route) => false);
+                    Flushbar(
+                      backgroundColor: successMessageColor,
+                      message: "Success!",
+                      duration: Duration(seconds: 3),
+                    ).show(context);
                   }),
               TextButton(
                   child: const Text("No",

@@ -33,9 +33,3 @@ class MyApp extends StatelessWidget {
         home: LoginScreen());
   }
 }
-
-/*
-const defaultInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(16)),
-    borderSide: BorderSide(color: lightTextColor, width: 1));
-*/
