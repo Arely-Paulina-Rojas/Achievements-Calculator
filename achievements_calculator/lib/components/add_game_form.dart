@@ -2,15 +2,18 @@ import 'package:achievements_calculator/components/image_button.dart';
 import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/database/utilities/utility.dart';
 import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../constants.dart';
 import '../database/common/game.dart';
 import '../database/common/user.dart';
 
 class AddGameForm extends StatelessWidget {
   final User user;
+  String pathImage = "";
   final TextEditingController gameNameController = TextEditingController();
   final TextEditingController percentageController = TextEditingController();
   AddGameForm({Key? key, required this.user}) : super(key: key);
@@ -36,7 +39,18 @@ class AddGameForm extends StatelessWidget {
               darkColor: lightDarkTextColor,
               isPasswordField: false,
               inputType: TextInputType.number),
-          ImageButton(labelText: "IMAGE", buttonText: "+", press: () {}),
+          ImageButton(
+              labelText: "IMAGE",
+              buttonText: "+",
+              press: () async {
+                ImagePicker()
+                    .pickImage(source: ImageSource.gallery)
+                    .then((imgFile) async {
+                  String imgString =
+                      Utility.base64String(await imgFile!.readAsBytes());
+                  this.pathImage = imgString;
+                });
+              }),
           const SizedBox(height: 10),
           MainButton(
               text: "Save",
@@ -44,9 +58,10 @@ class AddGameForm extends StatelessWidget {
                 if (validateForm(
                     gameNameController.text, percentageController.text)) {
                   if (validateNumber(percentageController.text)) {
+                    this.pathImage = validateImage(pathImage);
                     final game = Game(
                         null,
-                        "assets/icons/game.png",
+                        this.pathImage,
                         gameNameController.text,
                         double.parse(percentageController.text),
                         this.user.id!);
@@ -91,6 +106,11 @@ bool validateForm(String name, String percentage) {
   } else {
     return false;
   }
+}
+
+String validateImage(String image) {
+  if (image.isNotEmpty) return image;
+  return "assets/icons/game.png";
 }
 
 bool validateNumber(String percentage) {

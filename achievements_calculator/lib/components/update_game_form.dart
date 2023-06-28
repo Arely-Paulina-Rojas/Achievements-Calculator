@@ -3,14 +3,17 @@ import 'package:achievements_calculator/components/input_field.dart';
 import 'package:achievements_calculator/components/main_button.dart';
 import 'package:achievements_calculator/database/common/game.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/database/utilities/utility.dart';
 import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../constants.dart';
 import '../database/common/user.dart';
 
 class UpdateGameForm extends StatelessWidget {
   final Game? game;
+  String pathImage = "0";
   final TextEditingController gameNameController = TextEditingController();
   final TextEditingController percentageController = TextEditingController();
 
@@ -41,7 +44,18 @@ class UpdateGameForm extends StatelessWidget {
               darkColor: lightDarkTextColor,
               isPasswordField: false,
               inputType: TextInputType.number),
-          ImageButton(labelText: "IMAGE", buttonText: "+", press: () {}),
+          ImageButton(
+              labelText: "IMAGE",
+              buttonText: "+",
+              press: () {
+                ImagePicker()
+                    .pickImage(source: ImageSource.gallery)
+                    .then((imgFile) async {
+                  String imgString =
+                      Utility.base64String(await imgFile!.readAsBytes());
+                  pathImage = imgString;
+                });
+              }),
           const SizedBox(height: 10),
           MainButton(
               text: "Save",
@@ -49,9 +63,11 @@ class UpdateGameForm extends StatelessWidget {
                 if (validateForm(
                     gameNameController.text, percentageController.text)) {
                   if (validateNumber(percentageController.text)) {
+                    String newImage =
+                        validateImage(this.game!.image, this.pathImage);
                     final game = Game(
                         this.game!.id,
-                        "assets/icons/game.png",
+                        newImage,
                         gameNameController.text,
                         double.parse(percentageController.text),
                         this.game!.idUser);
@@ -95,6 +111,11 @@ class UpdateGameForm extends StatelessWidget {
 bool validateForm(String name, String percentage) {
   if (name.isNotEmpty && percentage.isNotEmpty) return true;
   return false;
+}
+
+String validateImage(String oldImage, newImage) {
+  if (newImage == "0") return oldImage;
+  return newImage;
 }
 
 bool validateNumber(String percentage) {

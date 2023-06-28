@@ -1,5 +1,6 @@
 import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/database/utilities/utility.dart';
 import 'package:achievements_calculator/screens/homepage/homepage_screen.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,14 @@ class GameCard extends StatelessWidget {
   }
 
   Widget _gameLogo() {
-    return Padding(
-        padding: const EdgeInsets.all(15.0), child: Image.asset(game!.image));
+    if (game!.image == "assets/icons/game.png") {
+      return Padding(
+          padding: const EdgeInsets.all(15.0), child: Image.asset(game!.image));
+    } else {
+      return Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Utility.imageFromBase64String(game!.image));
+    }
   }
 
   Widget _infoGameTexts(context) {
