@@ -54,8 +54,11 @@ class ContainerForm extends StatelessWidget {
                     bool validation = await SQLHelper.validateNickname(
                         nicknameTextController.text);
                     if (validation) {
-                      final user = User(null, nicknameTextController.text,
-                          passwordTextController.text);
+                      final user = User(
+                          null,
+                          nicknameTextController.text,
+                          passwordTextController.text,
+                          "assets/images/image_profile.jpg");
                       await SQLHelper.createUser(user);
                       Navigator.pushAndRemoveUntil(
                           context,

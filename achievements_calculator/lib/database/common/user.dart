@@ -1,12 +1,12 @@
 class User {
-  late String nickname, password;
+  late String nickname, password, avatar;
   int? id;
 
-  User(this.id, this.nickname, this.password);
+  User(this.id, this.nickname, this.password, this.avatar);
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
-    return User(
-        parsedJson['id'], parsedJson['nickname'], parsedJson['password']);
+    return User(parsedJson['id'], parsedJson['nickname'],
+        parsedJson['password'], parsedJson['avatar']);
   }
 
   Map<String, dynamic> toMap() {
@@ -14,6 +14,7 @@ class User {
     map["id"] = id;
     map["nickname"] = nickname;
     map["password"] = password;
+    map["avatar"] = avatar;
     return map;
   }
 }

@@ -21,7 +21,7 @@ void customShowUpdateUserDialog(BuildContext context, User user) {
       },
       pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 370,
+              height: 450,
               margin: const EdgeInsets.symmetric(horizontal: 26),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: const BoxDecoration(color: formBackgroundColor),

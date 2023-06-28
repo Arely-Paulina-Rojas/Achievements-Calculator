@@ -54,9 +54,6 @@ class GameCard extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Utility.imageFromBase64String(game!.image)),
       );
-      /*return Padding(
-          padding: const EdgeInsets.all(15.0), 
-          child: Utility.imageFromBase64String(game!.image));*/
     }
   }
 

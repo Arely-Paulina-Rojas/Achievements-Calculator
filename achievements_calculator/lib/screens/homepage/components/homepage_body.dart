@@ -1,5 +1,6 @@
 import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/database/db_helper.dart';
+import 'package:achievements_calculator/database/utilities/utility.dart';
 import 'package:achievements_calculator/screens/homepage/components/game_list.dart';
 import 'package:flutter/material.dart';
 import '../../../database/common/game.dart';
@@ -9,7 +10,7 @@ import 'background.dart';
 class HomepageBody extends StatelessWidget {
   final User user;
 
-  HomepageBody({Key? key, required this.user}) : super(key: key);
+  const HomepageBody({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
@@ -17,7 +18,7 @@ class HomepageBody extends StatelessWidget {
     return Background(
         child: SingleChildScrollView(
       child: Column(children: <Widget>[
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         _textsHeader(context),
         _loadGames()
       ]),
@@ -30,9 +31,12 @@ class HomepageBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          const SizedBox(height: 5),
+          _loadAvatar(),
+          const SizedBox(height: 3),
           _loadAverage(context),
-          SizedBox(height: 5),
-          Text(
+          const SizedBox(height: 5),
+          const Text(
             "Avg. Game Completion Rate",
             style: TextStyle(
                 color: lightTextColor,
@@ -42,6 +46,18 @@ class HomepageBody extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _loadAvatar() {
+    if (user.avatar == "assets/images/image_profile.jpg") {
+      return Image.asset(user.avatar);
+    } else {
+      return Container(
+        width: 185,
+        height: 185,
+        child: Utility.imageFromBase64String(user.avatar),
+      );
+    }
   }
 
   Widget _loadGames() {
@@ -60,7 +76,6 @@ class HomepageBody extends StatelessWidget {
         future: SQLHelper.caculateAverage(user.id!),
         builder: (BuildContext context, AsyncSnapshot<double> model) {
           if (model.hasData) {
-            print(model.data);
             return _yourAverage(model.data);
           }
           return const Center(child: CircularProgressIndicator());
@@ -70,7 +85,7 @@ class HomepageBody extends StatelessWidget {
   Widget _yourAverage(context) {
     return Text(
       context.toStringAsFixed(2) + "%",
-      style: TextStyle(
+      style: const TextStyle(
           color: lightTextColor, fontSize: 30, fontWeight: FontWeight.bold),
     );
   }

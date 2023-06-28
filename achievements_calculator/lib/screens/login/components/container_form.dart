@@ -56,7 +56,7 @@ class ContainerForm extends StatelessWidget {
                         nickNameTextController.text);
                     if (!validation) {
                       final user = User(null, nickNameTextController.text,
-                          passwordTextController.text);
+                          passwordTextController.text, "");
                       User? userLogin = await SQLHelper.login(user);
                       if (userLogin != null) {
                         Navigator.pushAndRemoveUntil(

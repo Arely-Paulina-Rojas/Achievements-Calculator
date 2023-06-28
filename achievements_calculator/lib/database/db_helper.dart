@@ -9,6 +9,7 @@ class SQLHelper {
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           nickname TEXT NOT NULL,
           password TEXT NOT NULL,
+          avatar TEXT,
           createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         )""");
 
@@ -57,7 +58,7 @@ class SQLHelper {
     return result.map((e) => Game.fromJson(e)).toList();
   }
 
-  static Future<User?> getSingleUser(int id) async {
+  static Future<User?> getSingleUser(int? id) async {
     final db = await SQLHelper.db();
     final List<Map<String, dynamic>> result =
         await db.query('user', where: "id = ?", whereArgs: [id], limit: 1);
@@ -116,6 +117,7 @@ class SQLHelper {
     final userData = {
       'nickname': user.nickname,
       'password': user.password,
+      'avatar': user.avatar,
       'createdAt': DateTime.now().toString()
     };
     final result = await db
