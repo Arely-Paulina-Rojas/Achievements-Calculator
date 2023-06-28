@@ -38,8 +38,11 @@ class HomepageScreen extends StatelessWidget {
               customShowAddGameDialog(context, user!);
               break;
             case 2:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const LoginScreen()),
+                  (Route<dynamic> route) => false);
               break;
           }
         },
