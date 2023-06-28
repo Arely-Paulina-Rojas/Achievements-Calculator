@@ -48,9 +48,15 @@ class GameCard extends StatelessWidget {
       return Padding(
           padding: const EdgeInsets.all(15.0), child: Image.asset(game!.image));
     } else {
-      return Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Utility.imageFromBase64String(game!.image));
+      return Container(
+        width: 100,
+        child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Utility.imageFromBase64String(game!.image)),
+      );
+      /*return Padding(
+          padding: const EdgeInsets.all(15.0), 
+          child: Utility.imageFromBase64String(game!.image));*/
     }
   }
 

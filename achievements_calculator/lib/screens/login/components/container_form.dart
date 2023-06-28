@@ -59,11 +59,12 @@ class ContainerForm extends StatelessWidget {
                           passwordTextController.text);
                       User? userLogin = await SQLHelper.login(user);
                       if (userLogin != null) {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    HomepageScreen(user: userLogin)));
+                                    HomepageScreen(user: userLogin)),
+                            (Route<dynamic> route) => false);
                         Flushbar(
                           backgroundColor: successMessageColor,
                           message: "Welcome " + userLogin.nickname + "!",
@@ -96,10 +97,11 @@ class ContainerForm extends StatelessWidget {
               SizedBox(height: size.width * 0.06),
               AlreadyHaveAnAccountCheck(
                 press: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignUpScreen()));
+                          builder: (context) => const SignUpScreen()),
+                      (Route<dynamic> route) => false);
                 },
               ),
             ],

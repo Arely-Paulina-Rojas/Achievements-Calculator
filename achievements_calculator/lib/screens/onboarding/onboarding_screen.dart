@@ -1,7 +1,6 @@
 import 'package:achievements_calculator/constants.dart';
 import 'package:achievements_calculator/screens/onboarding/components/onboarding_body.dart';
 import 'package:flutter/material.dart';
-
 import '../login/login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -16,8 +15,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          (Route<dynamic> route) => false);
     });
   }
 

@@ -10,7 +10,7 @@ import '../login/login_screen.dart';
 
 class HomepageScreen extends StatelessWidget {
   final User user;
-  HomepageScreen({Key? key, required this.user}) : super(key: key);
+  const HomepageScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
@@ -18,7 +18,7 @@ class HomepageScreen extends StatelessWidget {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: backgroundColor,
         color: cardBackgroundColor,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         items: const [
           Icon(Icons.account_box_rounded, color: lightTextColor),
           Icon(Icons.add, color: lightTextColor),

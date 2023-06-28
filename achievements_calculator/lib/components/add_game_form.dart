@@ -34,7 +34,7 @@ class AddGameForm extends StatelessWidget {
           InputField(
               onChanged: (value) {},
               controller: percentageController,
-              labelName: "PERCENGATE",
+              labelName: "PERCENTAGE",
               lightColor: lightDarkTextColor,
               darkColor: lightDarkTextColor,
               isPasswordField: false,

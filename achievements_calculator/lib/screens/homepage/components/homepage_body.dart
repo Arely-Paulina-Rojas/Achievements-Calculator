@@ -69,7 +69,7 @@ class HomepageBody extends StatelessWidget {
 
   Widget _yourAverage(context) {
     return Text(
-      context.toString() + "%",
+      context.toStringAsFixed(2) + "%",
       style: TextStyle(
           color: lightTextColor, fontSize: 30, fontWeight: FontWeight.bold),
     );

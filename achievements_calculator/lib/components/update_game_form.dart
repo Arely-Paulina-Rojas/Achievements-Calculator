@@ -39,7 +39,7 @@ class UpdateGameForm extends StatelessWidget {
               onChanged: (value) {},
               controller: percentageController
                 ..text = game!.percentage.toString() ?? "",
-              labelName: "PERCENGATE",
+              labelName: "PERCENTAGE",
               lightColor: lightDarkTextColor,
               darkColor: lightDarkTextColor,
               isPasswordField: false,
